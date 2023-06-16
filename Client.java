@@ -3,7 +3,7 @@ import java.net.Socket;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
-public class Client {
+public class Client  {
     public static void main(String[] args) {
         String ip = args[0];
         int port = Integer.parseInt(args[1]);
@@ -33,6 +33,9 @@ public class Client {
                 switch (seleziona_lista){
                     case "p":
                         System.out.println("Gestione lista personale");
+                        pw.println("LISTA_P");
+                        pw.flush();
+                        seleziona_cmd = "";
                         while (!seleziona_cmd.equals("q")){
                             System.out.println("------------------------------------------------------------");
                             System.out.println("a - Aggiungi membro del personale");
@@ -128,6 +131,9 @@ public class Client {
                         break;
                     case "v":
                         System.out.println("Gestione lista visitatori");
+                        pw.println("LISTA_V");
+                        pw.flush();
+                        seleziona_cmd = "";
                         while (!seleziona_cmd.equals("q")){
                             System.out.println("------------------------------------------------------------");
                             System.out.println("a - Aggiungi visitatore");

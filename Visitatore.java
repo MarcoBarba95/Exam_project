@@ -1,4 +1,6 @@
-public class Visitatore extends Persona{
+import java.io.Serializable;
+
+public class Visitatore extends Persona implements Serializable {
     private String NumDoc;
     private String IDBiglietto;
     private String TipologiaVisita;

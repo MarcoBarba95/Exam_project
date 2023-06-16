@@ -1,4 +1,6 @@
-public class Personale extends Persona{
+import java.io.Serializable;
+
+public class Personale extends Persona implements Serializable {
     private int NumBadge;
     private String Mansione;
 
