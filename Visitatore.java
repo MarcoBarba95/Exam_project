@@ -3,7 +3,7 @@ public class Visitatore extends Persona{
     private String IDBiglietto;
     private String TipologiaVisita;
 
-    public Visitatore(String nome, String cognome, int eta, char sesso, String numDoc, String IDBiglietto, String tipologiaVisita) {
+    public Visitatore(String nome, String cognome, int eta, String sesso, String numDoc, String IDBiglietto, String tipologiaVisita) {
         super(nome, cognome, eta, sesso);
         this.NumDoc = numDoc;
         this.IDBiglietto = IDBiglietto;

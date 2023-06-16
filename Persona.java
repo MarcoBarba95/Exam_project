@@ -2,9 +2,9 @@ public class Persona {
     private String nome;
     private String cognome;
     private int eta;
-    private char sesso;
+    private String sesso;
 
-    public Persona(String nome, String cognome, int eta, char sesso) {
+    public Persona(String nome, String cognome, int eta, String sesso) {
         this.nome = nome;
         this.cognome = cognome;
         this.eta = eta;
@@ -35,11 +35,11 @@ public class Persona {
         this.eta = eta;
     }
 
-    public char getSesso() {
+    public String getSesso() {
         return sesso;
     }
 
-    public void setSesso(char sesso) {
+    public void setSesso(String sesso) {
         this.sesso = sesso;
     }
 
