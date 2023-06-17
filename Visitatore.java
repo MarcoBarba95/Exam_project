@@ -39,10 +39,6 @@ public class Visitatore extends Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Visitatore{" +
-                "NumDoc='" + NumDoc + '\'' +
-                ", IDBiglietto='" + IDBiglietto + '\'' +
-                ", TipologiaVisita='" + TipologiaVisita + '\'' +
-                '}';
+        return super.toString() +  ", Numero documento= " + NumDoc  + ", IDBiglietto= " + IDBiglietto  + ", Tipologia di visita= " + TipologiaVisita + '\'';
     }
 }

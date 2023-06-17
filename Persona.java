@@ -47,11 +47,7 @@ public class Persona implements Serializable {
 
     @Override
     public String toString() {
-        return "Persona{" +
-                "nome='" + nome + '\'' +
-                ", cognome='" + cognome + '\'' +
-                ", eta=" + eta +
-                ", sesso=" + sesso +
-                '}';
+        return  "Nome= " + nome + ", Cognome= " + cognome + ", Età= " + eta + ", Sesso= " + sesso;
+
     }
 }

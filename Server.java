@@ -32,6 +32,7 @@ ArrayList<Visitatore> list_v = new ArrayList<>();
                 System.out.println("Gestione lista: " + scelta_lista);
 
                 if(scelta_lista.equals("LISTA_P")){
+                    received_command = "";
                     while (!received_command.equals("CMD_QUIT")) {
                         received_command = sc.nextLine();
 
@@ -97,6 +98,8 @@ ArrayList<Visitatore> list_v = new ArrayList<>();
                                 break;
                             case "CMD_QUIT":
                                 System.out.println("Ritorno alla selezione lista...");
+                                scelta_lista = "";
+
                                 break;
                             default:
                                 if(!received_command.isBlank()) {
@@ -106,6 +109,7 @@ ArrayList<Visitatore> list_v = new ArrayList<>();
                     }
                 }
                 else {
+                    received_command = "";
                     while (!received_command.equals("CMD_QUIT")) {
                         received_command = sc.nextLine();
 
@@ -172,6 +176,7 @@ ArrayList<Visitatore> list_v = new ArrayList<>();
                                 break;
                             case "CMD_QUIT":
                                 System.out.println("Ritorno alla selezione lista...");
+                                scelta_lista = "";
                                 break;
                             default:
                                 if(!received_command.isBlank()) {
