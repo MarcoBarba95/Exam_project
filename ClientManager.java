@@ -3,7 +3,7 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class ClientManager  {
+public class ClientManager  implements Runnable{
 Socket client_socket;
 Server myserver;
 public ClientManager(Socket client, Server server){
@@ -12,7 +12,7 @@ public ClientManager(Socket client, Server server){
     this.client_socket = client;
 }
 
-public void start(){
+public void go(){
     Scanner sc = null;
 
     try {
@@ -24,7 +24,7 @@ public void start(){
         String received_command = "";
 
         while (!scelta_lista.equals("CMD_CLOSE")){
-            scelta_lista = sc.nextLine();
+                scelta_lista = sc.nextLine();
             System.out.println("Gestione lista: " + scelta_lista);
 
             if(scelta_lista.equals("LISTA_P")){
@@ -48,7 +48,7 @@ public void start(){
                             }
                             System.out.println("Membro del personale aggiunto: " +nome + " " + cognome + " " + eta + " " + sesso + " " + NumBadge + " " + mansione);
                             var personale = new Personale(nome, cognome, Integer.parseInt(eta),sesso, Integer.parseInt(NumBadge), mansione);
-                            myserver.list_p.add(personale);
+                            myserver.AddPersonale(personale);
                             break;
 
                         case "CMD_SAVE_PERSONALE":
@@ -58,18 +58,16 @@ public void start(){
                             if(!end_command.equals("END_CMD")){
                                 System.out.println("Format error");
                             }
-                            var fos=new FileOutputStream(filename);
-                            var oos=new ObjectOutputStream(fos);
-                            oos.writeObject(myserver.list_p);
-                            oos.close();
+                            myserver.commandSave(filename,scelta_lista);
+
                             break;
                         case "CMD_MOSTRA_PERSONALE":
                             end_command=sc.nextLine();
                             if(!end_command.equals("END_CMD")){
                                 System.out.println("Format error");
                             }
-                            for (Personale p: myserver.list_p){
-                                pw.println(p);
+                            for (String s: myserver.getListString(scelta_lista)){
+                                pw.println(s);
                                 pw.flush();
                             }
                             pw.println("FINE_LISTA");
@@ -82,15 +80,8 @@ public void start(){
                             if(!end_command.equals("END_CMD")){
                                 System.out.println("Format error");
                             }
-                            var fis=new FileInputStream(file_to_load);
-                            var ois=new ObjectInputStream(fis);
+                            myserver.commandLoad(file_to_load, scelta_lista);
 
-                            try {
-                                myserver.list_p=(ArrayList<Personale>) ois.readObject();
-                            } catch (ClassNotFoundException e) {
-                                System.out.println("Impossibile caricare la lista");
-                            }
-                            ois.close();
                             break;
                         case "CMD_QUIT":
                             System.out.println("Ritorno alla selezione lista...");
@@ -126,7 +117,7 @@ public void start(){
                             }
                             System.out.println("Visitatore aggiunto: " +nome + " " + cognome + " " + eta + " " + sesso + " " + NumDoc + " " + IDBiglietto + " " + TipologiaVisita);
                             var visitatore = new Visitatore(nome, cognome, Integer.parseInt(eta),sesso, NumDoc, IDBiglietto, TipologiaVisita);
-                            myserver.list_v.add(visitatore);
+                            myserver.AddVisitatore(visitatore);
                             break;
 
                         case "CMD_SAVE_VISITATORE":
@@ -136,18 +127,15 @@ public void start(){
                             if(!end_command.equals("END_CMD")){
                                 System.out.println("Format error");
                             }
-                            var fos=new FileOutputStream(filename);
-                            var oos=new ObjectOutputStream(fos);
-                            oos.writeObject(myserver.list_v);
-                            oos.close();
+                            myserver.commandSave(filename,scelta_lista);
                             break;
                         case "CMD_MOSTRA_VISITATORE":
                             end_command=sc.nextLine();
                             if(!end_command.equals("END_CMD")){
                                 System.out.println("Format error");
                             }
-                            for (Visitatore v : myserver.list_v){
-                                pw.println(v);
+                            for (String s: myserver.getListString(scelta_lista)){
+                                pw.println(s);
                                 pw.flush();
                             }
                             pw.println("FINE_LISTA");
@@ -160,15 +148,8 @@ public void start(){
                             if(!end_command.equals("END_CMD")){
                                 System.out.println("Format error");
                             }
-                            var fis=new FileInputStream(file_to_load);
-                            var ois=new ObjectInputStream(fis);
+                            myserver.commandLoad(file_to_load, scelta_lista);
 
-                            try {
-                                myserver.list_v=(ArrayList<Visitatore>) ois.readObject();
-                            } catch (ClassNotFoundException e) {
-                                System.out.println("Impossibile caricare la lista");
-                            }
-                            ois.close();
                             break;
                         case "CMD_QUIT":
                             System.out.println("Ritorno alla selezione lista...");
@@ -189,4 +170,9 @@ public void start(){
 }
 
 
+    @Override
+    public void run() {
+        System.out.println("Inizio esecuzione...");
+        go();
+    }
 }

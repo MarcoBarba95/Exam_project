@@ -45,6 +45,8 @@ public class Persona implements Serializable {
         this.sesso = sesso;
     }
 
+
+
     @Override
     public String toString() {
         return  "Nome= " + nome + ", Cognome= " + cognome + ", Età= " + eta + ", Sesso= " + sesso;

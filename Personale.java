@@ -26,6 +26,8 @@ public class Personale extends Persona implements Serializable {
         Mansione = mansione;
     }
 
+
+
     @Override
     public String toString() {
         return super.toString() + ", Numero badge= " + NumBadge + ", Mansione= " + Mansione + '\'' ;
