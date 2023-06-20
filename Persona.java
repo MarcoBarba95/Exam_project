@@ -41,9 +41,16 @@ public class Persona implements Serializable {
         return sesso;
     }
 
-    public void setSesso(String sesso) {
+   public void setSesso(String sesso) {
         this.sesso = sesso;
     }
+
+   /* public void setSesso(String sesso) throws Exception {
+        if(!sesso.equals("M") || (!sesso.equals("F"))){
+            throw new Exception("Carattere non consentito");
+        }
+        else this.sesso = sesso;
+    }*/
 
 
 
