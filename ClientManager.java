@@ -26,8 +26,10 @@ public void go(){
         while (!scelta_lista.equals("CMD_CLOSE")){
                 scelta_lista = sc.nextLine();
             System.out.println("Gestione lista: " + scelta_lista);
-
-            if(scelta_lista.equals("LISTA_P")){
+            if(scelta_lista.equals("CMD_CLOSE")){
+                break;
+            }
+            else if(scelta_lista.equals("LISTA_P")){
                 received_command = "";
                 while (!received_command.equals("CMD_QUIT")) {
                     received_command = sc.nextLine();
