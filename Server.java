@@ -6,38 +6,38 @@ import java.util.Scanner;
 
 
 public class Server {
-ArrayList<Personale> list_p = new ArrayList<>();
-ArrayList<Visitatore> list_v = new ArrayList<>();
+    ArrayList<Personale> list_p = new ArrayList<>();
+    ArrayList<Visitatore> list_v = new ArrayList<>();
 
-public synchronized void AddPersonale(Personale p){
-    list_p.add(p);
-}
-public synchronized void AddVisitatore(Visitatore v){
-        list_v.add(v);
-}
-public synchronized void commandSave(String filename,String tipo_lista){
-
-    FileOutputStream fos = null;
-    ObjectOutputStream oos = null;
-
-    try {
-        fos = new FileOutputStream(filename);
-        oos = new ObjectOutputStream(fos);
-        if(tipo_lista.equals("LISTA_P")){
-        oos.writeObject(list_p);}
-        else if(tipo_lista.equals("LISTA_V")){
-            oos.writeObject(list_v);
-        }
-        else {
-            System.out.println("LISTA NON TROVATA");
-        }
-        oos.close();
-    } catch (FileNotFoundException e) {
-        throw new RuntimeException(e);
-    } catch (IOException e) {
-        throw new RuntimeException(e);
+    public synchronized void AddPersonale(Personale p){
+        list_p.add(p);
     }
-}
+    public synchronized void AddVisitatore(Visitatore v){
+            list_v.add(v);
+    }
+    public synchronized void commandSave(String filename,String tipo_lista){
+
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+
+        try {
+            fos = new FileOutputStream(filename);
+            oos = new ObjectOutputStream(fos);
+            if(tipo_lista.equals("LISTA_P")){
+            oos.writeObject(list_p);}
+            else if(tipo_lista.equals("LISTA_V")){
+                oos.writeObject(list_v);
+            }
+            else {
+                System.out.println("LISTA NON TROVATA");
+            }
+            oos.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public synchronized void commandLoad(String filename,String tipo_lista) {
 
@@ -64,14 +64,6 @@ public synchronized void commandSave(String filename,String tipo_lista){
         }
     }
 
-
-
-
-
-
-
-
-
     public synchronized ArrayList<String> getListString(String tipo_lista) {
         var people = new ArrayList<String>();
         if(tipo_lista.equals("LISTA_V")){
@@ -90,12 +82,24 @@ public synchronized void commandSave(String filename,String tipo_lista){
         return people;
     }
 
+    /*public void periodicPrint(){
+        while(true){
+            try {
+                Thread.sleep(30000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("I'm still alive!!!");
+        }
+    }*/
 
     public static void main(String[] args) {
         var myserver = new Server();
 
         int port = Integer.parseInt(args[0]); //Cast da stringa a intero
 
+        /*Runnable r=()-> myserver.periodicPrint();
+        new Thread(r).start();*/
 
         try {
             var serverSocket = new ServerSocket(port);
