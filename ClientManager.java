@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class ClientManager  implements Runnable{
@@ -197,10 +198,14 @@ public void go(){
                 }
             }
         }
+
+
     }
         catch (IOException e) {
         throw new RuntimeException(e);
     }
+    
+
 }
 
 
@@ -210,3 +215,5 @@ public void go(){
         go();
     }
 }
+
+
