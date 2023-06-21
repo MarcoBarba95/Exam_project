@@ -98,8 +98,7 @@ public class Client  {
                                             System.out.println("-----------------------------------------------------");
                                         }
                                     }
-                                    /*vjkf*/
-                                    //jklkmnjklkjkl
+
                                     break;
                                 case "s":
                                     System.out.println("Inserisci nome file: ");
