@@ -110,15 +110,14 @@ public void go(){
                             var cognome = sc.nextLine();
                             var eta = sc.nextLine();
                             var sesso = sc.nextLine();
-                            var NumDoc = sc.nextLine();
                             var IDBiglietto = sc.nextLine();
                             var TipologiaVisita = sc.nextLine();
                             var end_command = sc.nextLine();
                             if(!end_command.equals("END_CMD")){
                                 System.out.println("Format error");
                             }
-                            System.out.println("Visitatore aggiunto: " +nome + " " + cognome + " " + eta + " " + sesso + " " + NumDoc + " " + IDBiglietto + " " + TipologiaVisita);
-                            var visitatore = new Visitatore(nome, cognome, Integer.parseInt(eta),sesso, NumDoc, IDBiglietto, TipologiaVisita);
+                            System.out.println("Visitatore aggiunto: " +nome + " " + cognome + " " + eta + " " + sesso + " " + IDBiglietto + " " + TipologiaVisita);
+                            var visitatore = new Visitatore(nome, cognome, Integer.parseInt(eta),sesso, IDBiglietto, TipologiaVisita);
                             myserver.AddVisitatore(visitatore);
                             break;
 

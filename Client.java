@@ -154,8 +154,6 @@ public class Client  {
                                     var eta = input.nextLine();
                                     System.out.println("Inserisci sesso:");
                                     var sesso = input.nextLine();
-                                    System.out.println("Inserisci Numero documento:");
-                                    var NumDoc = input.nextLine();
                                     System.out.println("Inserisci ID Biglietto:");
                                     var IDBiglietto = input.nextLine();
                                     System.out.println("Inserisci tipologia biglietto: ");
@@ -170,8 +168,6 @@ public class Client  {
                                     pw.println(eta);
                                     pw.flush();
                                     pw.println(sesso);
-                                    pw.flush();
-                                    pw.println(NumDoc);
                                     pw.flush();
                                     pw.println(IDBiglietto);
                                     pw.flush();

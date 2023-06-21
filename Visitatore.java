@@ -1,26 +1,15 @@
 import java.io.Serializable;
 
 public class Visitatore extends Persona implements Serializable {
-    private String NumDoc;
     private String IDBiglietto;
     private String TipologiaVisita;
 
-    public Visitatore(String nome, String cognome, int eta, String sesso, String numDoc, String IDBiglietto, String tipologiaVisita) {
+    public Visitatore(String nome, String cognome, int eta, String sesso, String IDBiglietto, String tipologiaVisita) {
         super(nome, cognome, eta, sesso);
-        this.NumDoc = numDoc;
         this.IDBiglietto = IDBiglietto;
         this.TipologiaVisita = tipologiaVisita;
 
     }
-
-    public String getNumDoc() {
-        return NumDoc;
-    }
-
-    public void setNumDoc(String numDoc) {
-        NumDoc = numDoc;
-    }
-
     public String getIDBiglietto() {
         return IDBiglietto;
     }
@@ -39,6 +28,6 @@ public class Visitatore extends Persona implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() +  ", Numero documento= " + NumDoc  + ", IDBiglietto= " + IDBiglietto  + ", Tipologia di visita= " + TipologiaVisita + '\'';
+        return super.toString() + ", IDBiglietto= " + IDBiglietto  + ", Tipologia di visita= " + TipologiaVisita + '\'';
     }
 }
