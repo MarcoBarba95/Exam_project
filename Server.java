@@ -2,6 +2,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.io.*;
+import java.util.Random;
 import java.util.Scanner;
 
 
@@ -80,6 +81,44 @@ public class Server {
             System.out.println("LISTA NON TROVATA");
         }
         return people;
+    }
+
+    public static String generaBadge(String mansione){
+        String badge="";
+        int randA= (int) (Math.random()*(9999-1000));
+        if(mansione.equals("Archeologo") || mansione.equals("archeologo")){
+            String badgeArch= "CTDE1000AC74";
+            badge=badgeArch+Integer.toString(randA);
+        }
+        else if(mansione.equals("Sicurezza") || mansione.equals("sicurezza")){
+            String badgeSic= "CTDE1000SC89";
+            badge=badgeSic+Integer.toString(randA);
+        }
+        else if(mansione.equals("Amministrazione") || mansione.equals("amministrazione")){
+            String badgeAmm= "CTDE1000AM69";
+            badge=badgeAmm+Integer.toString(randA);
+        }
+        else if(mansione.equals("Guida") || mansione.equals("guida")){
+            String badgeGui= "CTDE1000GT15";
+            badge=badgeGui+Integer.toString(randA);
+        }
+        else if(mansione.equals("Pulizie") || mansione.equals("pulizie")){
+            String badgePul= "CTDE1000PZ35";
+            badge=badgePul+Integer.toString(randA);
+        }
+        return badge;
+    }
+
+    public static String generaBiglietto(String tipo_visita){
+        String biglietto="";
+        int randB= (int) (Math.random()*(999999-100000));
+        if(tipo_visita.equals("Guidata") || tipo_visita.equals("guidata")){
+            biglietto="GDT654AC"+randB;
+        }
+        if(tipo_visita.equals("Libera") || tipo_visita.equals("libera")){
+            biglietto="LBR290GJ"+randB;
+        }
+        return biglietto;
     }
 
     /*public void periodicPrint(){

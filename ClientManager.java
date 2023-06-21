@@ -36,21 +36,40 @@ public void go(){
 
                     System.out.println("Comando ricevuto " + received_command);
                     switch (received_command){
-
                         case "CMD_ADD_PERSONALE":
                             var nome = sc.nextLine();
                             var cognome = sc.nextLine();
                             var eta = sc.nextLine();
+                            if(Integer.parseInt(eta)<18 || Integer.parseInt(eta)>70){
+                                System.out.println("Età non valida");
+                                pw.println("Età non valida!");
+                                pw.flush();
+                                break;
+                            }
                             var sesso = sc.nextLine();
-                            var NumBadge = sc.nextLine();
+                            if(!(sesso.equals("M") || sesso.equals("m")) && !(sesso.equals("F") || sesso.equals("f"))){
+                                System.out.println("Sesso non valido");
+                                pw.println("Sesso non valido! Inserire M,F,m,f");
+                                pw.flush();
+                                break;
+                            }
                             var mansione = sc.nextLine();
                             var end_command = sc.nextLine();
                             if(!end_command.equals("END_CMD")){
                                 System.out.println("Format error");
                             }
+                            String NumBadge=myserver.generaBadge(mansione);
+                            if(NumBadge.isBlank()){
+                                System.out.println("MANSIONE NON VALIDA");
+                                pw.println("Mansione non valida!");
+                                pw.flush();
+                                break;
+                            }
                             System.out.println("Membro del personale aggiunto: " +nome + " " + cognome + " " + eta + " " + sesso + " " + NumBadge + " " + mansione);
-                            var personale = new Personale(nome, cognome, Integer.parseInt(eta),sesso, Integer.parseInt(NumBadge), mansione);
+                            var personale = new Personale(nome, cognome, Integer.parseInt(eta),sesso, NumBadge, mansione);
                             myserver.AddPersonale(personale);
+                            pw.println("Utente aggiunto correttamente!");
+                            pw.flush();
                             break;
 
                         case "CMD_SAVE_PERSONALE":
@@ -110,15 +129,29 @@ public void go(){
                             var cognome = sc.nextLine();
                             var eta = sc.nextLine();
                             var sesso = sc.nextLine();
-                            var IDBiglietto = sc.nextLine();
+                            if(!(sesso.equals("M") || sesso.equals("m")) && !(sesso.equals("F") || sesso.equals("f"))){
+                                System.out.println("Sesso non valido");
+                                pw.println("Sesso non valido! Inserire M,F,m,f");
+                                pw.flush();
+                                break;
+                            }
                             var TipologiaVisita = sc.nextLine();
                             var end_command = sc.nextLine();
                             if(!end_command.equals("END_CMD")){
                                 System.out.println("Format error");
                             }
+                            String IDBiglietto=myserver.generaBiglietto(TipologiaVisita);
+                            if(IDBiglietto.isBlank()){
+                                System.out.println("Tipologia biglietto NON VALIDA");
+                                pw.println("Tipologia biglietto non valida! Inserire Guidata o Libera");
+                                pw.flush();
+                                break;
+                            }
                             System.out.println("Visitatore aggiunto: " +nome + " " + cognome + " " + eta + " " + sesso + " " + IDBiglietto + " " + TipologiaVisita);
                             var visitatore = new Visitatore(nome, cognome, Integer.parseInt(eta),sesso, IDBiglietto, TipologiaVisita);
                             myserver.AddVisitatore(visitatore);
+                            pw.println("Visitatore aggiunto");
+                            pw.flush();
                             break;
 
                         case "CMD_SAVE_VISITATORE":

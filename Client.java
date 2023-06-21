@@ -56,10 +56,9 @@ public class Client  {
                                     var eta = input.nextLine();
                                     System.out.println("Inserisci sesso:");
                                     var sesso = input.nextLine();
-                                    System.out.println("Inserisci Numero di Badge:");
-                                    var NumBadge = input.nextLine();
                                     System.out.println("Inserisci mansione:");
                                     var mansione = input.nextLine();
+
 
                                     pw.println("CMD_ADD_PERSONALE");
                                     pw.flush();
@@ -71,12 +70,14 @@ public class Client  {
                                     pw.flush();
                                     pw.println(sesso);
                                     pw.flush();
-                                    pw.println(NumBadge);
-                                    pw.flush();
                                     pw.println(mansione);
                                     pw.flush();
                                     pw.println("END_CMD");
                                     pw.flush();
+
+                                    var conferma=scanner.nextLine();
+                                    System.out.println(conferma);
+
                                     break;
                                 case "l":
                                     pw.println("CMD_MOSTRA_PERSONALE");
@@ -154,8 +155,6 @@ public class Client  {
                                     var eta = input.nextLine();
                                     System.out.println("Inserisci sesso:");
                                     var sesso = input.nextLine();
-                                    System.out.println("Inserisci ID Biglietto:");
-                                    var IDBiglietto = input.nextLine();
                                     System.out.println("Inserisci tipologia biglietto: ");
                                     var TipologiaBiglietto = input.nextLine();
 
@@ -169,12 +168,13 @@ public class Client  {
                                     pw.flush();
                                     pw.println(sesso);
                                     pw.flush();
-                                    pw.println(IDBiglietto);
-                                    pw.flush();
                                     pw.println(TipologiaBiglietto);
                                     pw.flush();
                                     pw.println("END_CMD");
                                     pw.flush();
+
+                                    var conferma=scanner.nextLine();
+                                    System.out.println(conferma);
                                     break;
                                 case "l":
                                     pw.println("CMD_MOSTRA_VISITATORE");

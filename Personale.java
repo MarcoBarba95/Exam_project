@@ -1,20 +1,20 @@
 import java.io.Serializable;
 
 public class Personale extends Persona implements Serializable {
-    private int NumBadge;
+    private String NumBadge;
     private String Mansione;
 
-    public Personale(String nome, String cognome, int eta, String sesso, int numBadge, String mansione) {
+    public Personale(String nome, String cognome, int eta, String sesso, String numBadge, String mansione) {
         super(nome, cognome, eta, sesso);
         this.NumBadge = numBadge;
         this.Mansione = mansione;
     }
 
-    public int getNumBadge() {
+    public String getNumBadge() {
         return NumBadge;
     }
 
-    public void setNumBadge(int numBadge) {
+    public void setNumBadge(String numBadge) {
         NumBadge = numBadge;
     }
 
