@@ -32,7 +32,6 @@ public class Server {
         }
         return rimozione;
     }*/
-/*554*/
     public synchronized void AddVisitatore(Visitatore v){
             list_v.add(v);
     }
@@ -164,6 +163,24 @@ public class Server {
             Validita = "Biglietto non presente";
         }
         return Validita;
+    }
+
+    public synchronized String ingressoPersonale(String numBadge){
+        String Ingresso = "";
+        int i = 0;
+        for(Personale p: list_p){
+            var Badge = p.getNumBadge();
+            if(numBadge.equals(Badge)){
+                i=1;
+
+            }
+
+        }
+        if (i==0){
+            System.out.println("Badge non riconosciuto, reinserire!");
+            Ingresso = "Badge non riconosciuto, reinserire!";
+        }
+        return Ingresso;
     }
 
 

@@ -267,6 +267,18 @@ public class Client  {
                             System.out.println("Biglietto non presente in lista");
                         }
                         break;
+                    case "i":
+                        System.out.println("Inserire numero di badge per timbrare l'ingresso:");
+                        var Badge=input.nextLine();
+                        pw.println("IN_PERS");
+                        pw.flush();
+                        pw.println(Badge);
+                        pw.flush();
+                        pw.println("END_CMD");
+                        pw.flush();
+
+
+                        break;
                     case "c":
                         System.out.println("Chiusura programma...");
                         pw.println("CMD_CLOSE");

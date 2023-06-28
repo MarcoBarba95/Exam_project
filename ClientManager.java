@@ -66,8 +66,10 @@ public void go(){
                                 pw.flush();
                                 break;
                             }
+                            var ingresso="";
+                            var uscita="";
                             System.out.println("Membro del personale aggiunto: " +nome + " " + cognome + " " + eta + " " + sesso + " " + NumBadge + " " + mansione);
-                            var personale = new Personale(nome, cognome, Integer.parseInt(eta),sesso, NumBadge, mansione);
+                            var personale = new Personale(nome, cognome, Integer.parseInt(eta),sesso, NumBadge, mansione, ingresso, uscita);
                             myserver.AddPersonale(personale);
                             pw.println("Utente aggiunto correttamente!");
                             pw.flush();
@@ -210,13 +212,21 @@ public void go(){
             }
             else if (scelta_lista.equals("BIGLIETTERIA")){
                 received_command = sc.nextLine();
-               var end_command=sc.nextLine();
+                var end_command=sc.nextLine();
                 if(!end_command.equals("END_CMD")){
                     System.out.println("Format error");
                 }
                 var checkBiglietto = myserver.controlloBiglietto(received_command);
                 pw.println(checkBiglietto);
                 pw.flush();
+            }
+            else if(scelta_lista.equals("IN_PERS")){
+                received_command=sc.nextLine();
+                var end_command=sc.nextLine();
+                if(!end_command.equals("END_CMD")){
+                    System.out.println("Format error");
+                }
+
             }
         }
 
