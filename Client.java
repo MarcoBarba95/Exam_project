@@ -42,6 +42,7 @@ public class Client  {
                         while (!seleziona_cmd.equals("q")){
                             System.out.println("------------------------------------------------------------");
                             System.out.println("a - Aggiungi membro del personale");
+                            System.out.println("r - Rimuovi membro del personale");
                             System.out.println("l - Mostra lista membri del personale");
                             System.out.println("s - Salva lista membri del personale");
                             System.out.println("c - Carica lista membri del personale");
@@ -81,6 +82,23 @@ public class Client  {
                                     var conferma=scanner.nextLine();
                                     System.out.println(conferma);
 
+                                    break;
+                                case "r":
+                                    System.out.println("Inserire numero di Badge da eliminare:");
+                                    pw.println("CMD_REMOVE_PERSONALE");
+                                    pw.flush();
+                                    var Badge=input.nextLine();
+                                    pw.println(Badge);
+                                    pw.flush();
+                                    pw.println("END_CMD");
+                                    pw.flush();
+                                    var rimozione = scanner.nextLine();
+                                    if(rimozione.equals("Utente rimosso correttamente")){
+                                        System.out.println("Utente rimosso correttamente");
+                                    }
+                                    else if(rimozione.equals("Impossibile rimuovere utente, possibili cause: utente non presenti nella lista o numero di badge errato")){
+                                        System.out.println("Impossibile rimuovere utente, possibili cause: utente non presenti nella lista o numero di badge errato");
+                                    }
                                     break;
                                 case "l":
                                     pw.println("CMD_MOSTRA_PERSONALE");
@@ -247,7 +265,6 @@ public class Client  {
                         }
                         else if(ticket.equals("Biglietto non presente")){
                             System.out.println("Biglietto non presente in lista");
-
                         }
                         break;
                     case "c":

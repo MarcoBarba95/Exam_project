@@ -13,6 +13,26 @@ public class Server {
     public synchronized void AddPersonale(Personale p){
         list_p.add(p);
     }
+/*    public synchronized String RemovePersonale(String NumBadge){
+        String rimozione = "";
+        int i = 0;
+        for(Personale p: list_p){
+            var Badge=p.getNumBadge();
+            if(NumBadge.equals(Badge)){
+                i=1;
+                list_p.remove(p);
+                rimozione="Utente rimosso correttamente";
+                System.out.println("Utente rimosso correttamente");
+            }
+        }
+
+       if (i==0){
+            System.out.println("Impossibile rimuovere utente, possibili cause: utente non presenti nella lista o numero di badge errato");
+            rimozione="Impossibile rimuovere utente, possibili cause: utente non presenti nella lista o numero di badge errato";
+        }
+        return rimozione;
+    }*/
+
     public synchronized void AddVisitatore(Visitatore v){
             list_v.add(v);
     }

@@ -72,7 +72,16 @@ public void go(){
                             pw.println("Utente aggiunto correttamente!");
                             pw.flush();
                             break;
-
+                       /* case "CMD_REMOVE_PERSONALE":
+                            var Badge = sc.nextLine();
+                            end_command=sc.nextLine();
+                            if(!end_command.equals("END_CMD")){
+                                System.out.println("Format error");
+                            }
+                            var checkOperazione = myserver.RemovePersonale(Badge);
+                            pw.println(checkOperazione);
+                            pw.flush();
+                            break;*/
                         case "CMD_SAVE_PERSONALE":
                             System.out.println("Saving list...");
                             String filename=sc.nextLine();
@@ -208,7 +217,6 @@ public void go(){
                 var checkBiglietto = myserver.controlloBiglietto(received_command);
                 pw.println(checkBiglietto);
                 pw.flush();
-
             }
         }
 
