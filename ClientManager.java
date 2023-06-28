@@ -82,7 +82,6 @@ public void go(){
                             pw.println(checkOperazione);
                             pw.flush();
                             break;*/
-                        /*jhjhjh*/
                         case "CMD_SAVE_PERSONALE":
                             System.out.println("Saving list...");
                             String filename=sc.nextLine();

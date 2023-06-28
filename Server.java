@@ -32,7 +32,7 @@ public class Server {
         }
         return rimozione;
     }*/
-
+/*554*/
     public synchronized void AddVisitatore(Visitatore v){
             list_v.add(v);
     }
