@@ -182,6 +182,7 @@ public class Server {
                 Ingresso = DataIngresso.format(DataIngressoFormat);
                 System.out.println("Benvenuto! " + Ingresso);
                 p.setOrarioIngresso(Ingresso);
+                p.setStatus(true);
             }
 
         }

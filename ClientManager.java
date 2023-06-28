@@ -68,8 +68,10 @@ public void go(){
                             }
                             var ingresso="";
                             var uscita="";
+                            var status=false;
+                            var totminuti=0;
                             System.out.println("Membro del personale aggiunto: " +nome + " " + cognome + " " + eta + " " + sesso + " " + NumBadge + " " + mansione);
-                            var personale = new Personale(nome, cognome, Integer.parseInt(eta),sesso, NumBadge, mansione, ingresso, uscita);
+                            var personale = new Personale(nome, cognome, Integer.parseInt(eta),sesso, NumBadge, mansione, ingresso, uscita, status, totminuti);
                             myserver.AddPersonale(personale);
                             pw.println("Utente aggiunto correttamente!");
                             pw.flush();
