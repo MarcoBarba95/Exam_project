@@ -200,37 +200,14 @@ public void go(){
                 }
             }
             else if (scelta_lista.equals("BIGLIETTERIA")){
-                int i=0;
                 received_command = sc.nextLine();
                var end_command=sc.nextLine();
                 if(!end_command.equals("END_CMD")){
                     System.out.println("Format error");
                 }
-                for(Visitatore v: myserver.list_v){
-                    var Biglietto = v.getIDBiglietto();
-                    if(received_command.equals(Biglietto)){
-                        i=1;
-                        if(v.isValidita()){
-                            System.out.println("Cliente accettato");
-                            v.setValidita(false);
-                            pw.println(("Cliente accettato"));
-                            pw.flush();
-
-                        }
-                        else {
-                            System.out.println("Biglietto già usato");
-                            pw.println("Biglietto già usato");
-                            pw.flush();
-                        }
-                    }
-
-                }
-                if (i==0){
-                    System.out.println("Biglietto non presente");
-                    pw.println("Biglietto non presente");
-                    pw.flush();
-                }
-
+                var checkBiglietto = myserver.controlloBiglietto(received_command);
+                pw.println(checkBiglietto);
+                pw.flush();
 
             }
         }

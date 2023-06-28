@@ -120,8 +120,30 @@ public class Server {
         }
         return biglietto;
     }
-    public static void controlloBiglietto(String IDBiglietto){
+    public synchronized String controlloBiglietto(String IDBiglietto){
+        String Validita = "";
+        int i = 0;
+        for(Visitatore v: list_v){
+            var Biglietto = v.getIDBiglietto();
+            if(IDBiglietto.equals(Biglietto)){
+                i=1;
+                if(v.isValidita()){
+                    System.out.println("Cliente accettato");
+                    v.setValidita(false);
+                    Validita = "Cliente accettato";
+                }
+                else {
+                    System.out.println("Biglietto già usato");
+                    Validita = "Biglietto già usato";
+                }
+            }
 
+        }
+        if (i==0){
+            System.out.println("Biglietto non presente");
+            Validita = "Biglietto non presente";
+        }
+        return Validita;
     }
 
 
@@ -130,8 +152,7 @@ public class Server {
 
         int port = Integer.parseInt(args[0]); //Cast da stringa a intero
 
-        /*Runnable r=()-> myserver.periodicPrint();
-        new Thread(r).start();*/
+
 
         try {
             var serverSocket = new ServerSocket(port);
