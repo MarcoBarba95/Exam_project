@@ -143,9 +143,9 @@ public class Server {
         try {
             var serverSocket = new ServerSocket(port);
             while (true){
-                System.out.println("SERVER: Waiting for connection...");
+                System.out.println("SERVER: In attesa di connessione...");
                 var client_socket=serverSocket.accept();
-                System.out.println("SERVER: Accepted connection from "+client_socket.getRemoteSocketAddress());
+                System.out.println("SERVER: Accettata connessione con "+client_socket.getRemoteSocketAddress());
 
                 var cm = new ClientManager(client_socket, myserver);
                 new Thread(cm).start();

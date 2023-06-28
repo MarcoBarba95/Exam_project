@@ -22,9 +22,12 @@ public class Client  {
 
             while(!seleziona_lista.equals("c")){
                 System.out.println("------------------------------------------------------------");
-                System.out.println("Procedura di selezione della lista");
-                System.out.println("p - Gestione lista personale");
+                System.out.println("Scegliere il tipo di operazione che di desidera effettuare:");
+                System.out.println("p - Gestione lista del personale");
                 System.out.println("v - Gestione lista visitatori");
+                System.out.println("b - Biglietteria");
+                System.out.println("i - Ingresso del personale");
+                System.out.println("u - Uscita del personale");
                 System.out.println("c - Chiudi il programma");
                 System.out.println("-------------------------------------------------------------");
                 System.out.println("Inserisci scelta: ");
@@ -32,7 +35,7 @@ public class Client  {
 
                 switch (seleziona_lista){
                     case "p":
-                        System.out.println("Gestione lista personale");
+                        System.out.println("Gestione lista del personale");
                         pw.println("LISTA_P");
                         pw.flush();
                         seleziona_cmd = "";
@@ -56,7 +59,7 @@ public class Client  {
                                     var eta = input.nextLine();
                                     System.out.println("Inserisci sesso:");
                                     var sesso = input.nextLine();
-                                    System.out.println("Inserisci mansione:");
+                                    System.out.println("Inserisci mansione (Archeologo, Sicurezza, Amministrazione, Guida, Pulizie):");
                                     var mansione = input.nextLine();
 
 
@@ -98,7 +101,6 @@ public class Client  {
                                             System.out.println("-----------------------------------------------------");
                                         }
                                     }
-
                                     break;
                                 case "s":
                                     System.out.println("Inserisci nome file: ");
@@ -155,7 +157,7 @@ public class Client  {
                                     var eta = input.nextLine();
                                     System.out.println("Inserisci sesso:");
                                     var sesso = input.nextLine();
-                                    System.out.println("Inserisci tipologia biglietto: ");
+                                    System.out.println("Inserisci tipologia biglietto - Guidata o Libera: ");
                                     var TipologiaBiglietto = input.nextLine();
 
                                     pw.println("CMD_ADD_VISITATORE");
