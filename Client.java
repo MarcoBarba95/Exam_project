@@ -229,6 +229,27 @@ public class Client  {
                             }
                         }
                         break;
+                    case "b":
+                        System.out.println("Inserire numero biglietto: ");
+                        var IDBiglietto = input.nextLine();
+                        pw.println("BIGLIETTERIA");
+                        pw.flush();
+                        pw.println(IDBiglietto);
+                        pw.flush();
+                        pw.println("END_CMD");
+                        pw.flush();
+                        var ticket = scanner.nextLine();
+                        if(ticket.equals("Cliente accettato")){
+                            System.out.println("Benvenuto!");
+                        }
+                        else if(ticket.equals("Biglietto già usato")){
+                            System.out.println("Hai già usato il tuo biglietto!");
+                        }
+                        else if(ticket.equals("Biglietto non presente")){
+                            System.out.println("Biglietto non presente in lista");
+
+                        }
+                        break;
                     case "c":
                         System.out.println("Chiusura programma...");
                         pw.println("CMD_CLOSE");

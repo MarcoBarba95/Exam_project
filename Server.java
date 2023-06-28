@@ -120,17 +120,10 @@ public class Server {
         }
         return biglietto;
     }
+    public static void controlloBiglietto(String IDBiglietto){
 
-    /*public void periodicPrint(){
-        while(true){
-            try {
-                Thread.sleep(30000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            System.out.println("I'm still alive!!!");
-        }
-    }*/
+    }
+
 
     public static void main(String[] args) {
         var myserver = new Server();

@@ -117,7 +117,7 @@ public void go(){
                     }
                 }
             }
-            else {
+            else if(scelta_lista.equals("LISTA_V")){
                 received_command = "";
                 while (!received_command.equals("CMD_QUIT")) {
                     received_command = sc.nextLine();
@@ -130,6 +130,7 @@ public void go(){
                             var cognome = sc.nextLine();
                             var eta = sc.nextLine();
                             var sesso = sc.nextLine();
+
                             if(!(sesso.equals("M") || sesso.equals("m")) && !(sesso.equals("F") || sesso.equals("f"))){
                                 System.out.println("Sesso non valido");
                                 pw.println("Sesso non valido! Inserire M,F,m,f");
@@ -148,8 +149,9 @@ public void go(){
                                 pw.flush();
                                 break;
                             }
+                            var Validita = true;
                             System.out.println("Visitatore aggiunto: " +nome + " " + cognome + " " + eta + " " + sesso + " " + IDBiglietto + " " + TipologiaVisita);
-                            var visitatore = new Visitatore(nome, cognome, Integer.parseInt(eta),sesso, IDBiglietto, TipologiaVisita);
+                            var visitatore = new Visitatore(nome, cognome, Integer.parseInt(eta),sesso, IDBiglietto, TipologiaVisita, Validita);
                             myserver.AddVisitatore(visitatore);
                             pw.println("Visitatore aggiunto");
                             pw.flush();
@@ -196,6 +198,40 @@ public void go(){
                             }
                     }
                 }
+            }
+            else if (scelta_lista.equals("BIGLIETTERIA")){
+                int i=0;
+                received_command = sc.nextLine();
+               var end_command=sc.nextLine();
+                if(!end_command.equals("END_CMD")){
+                    System.out.println("Format error");
+                }
+                for(Visitatore v: myserver.list_v){
+                    var Biglietto = v.getIDBiglietto();
+                    if(received_command.equals(Biglietto)){
+                        i=1;
+                        if(v.isValidita()){
+                            System.out.println("Cliente accettato");
+                            v.setValidita(false);
+                            pw.println(("Cliente accettato"));
+                            pw.flush();
+
+                        }
+                        else {
+                            System.out.println("Biglietto già usato");
+                            pw.println("Biglietto già usato");
+                            pw.flush();
+                        }
+                    }
+
+                }
+                if (i==0){
+                    System.out.println("Biglietto non presente");
+                    pw.println("Biglietto non presente");
+                    pw.flush();
+                }
+
+
             }
         }
 
