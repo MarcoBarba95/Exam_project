@@ -48,6 +48,6 @@ public class Personale extends Persona implements Serializable {
 
     @Override
     public String toString() {
-        return super.toString() + ", Numero badge= " + NumBadge + ", Mansione= " + Mansione + '\'' ;
+        return super.toString() + ", Numero badge= " + NumBadge + ", Mansione= " + Mansione + " , Ingresso= " + OrarioIngresso + " , Uscita" + OrarioUscita+'\'' ;
     }
 }

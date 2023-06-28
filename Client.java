@@ -276,8 +276,13 @@ public class Client  {
                         pw.flush();
                         pw.println("END_CMD");
                         pw.flush();
-
-
+                        var enter = scanner.nextLine();
+                        if(enter.isBlank()){
+                            System.out.println("Numero di Badge sbagliato, reinserire!");
+                        }
+                        else {
+                            System.out.println("Data inserita: " + enter);
+                        }
                         break;
                     case "c":
                         System.out.println("Chiusura programma...");

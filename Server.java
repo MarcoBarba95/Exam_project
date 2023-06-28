@@ -1,6 +1,8 @@
 import java.io.*;
 import java.net.ServerSocket;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
@@ -157,6 +159,8 @@ public class Server {
                 }
             }
 
+            
+
         }
         if (i==0){
             System.out.println("Biglietto non presente");
@@ -165,14 +169,19 @@ public class Server {
         return Validita;
     }
 
+
     public synchronized String ingressoPersonale(String numBadge){
         String Ingresso = "";
+        LocalDateTime DataIngresso = LocalDateTime.now();
+        DateTimeFormatter DataIngressoFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         int i = 0;
         for(Personale p: list_p){
             var Badge = p.getNumBadge();
             if(numBadge.equals(Badge)){
                 i=1;
-
+                Ingresso = DataIngresso.format(DataIngressoFormat);
+                System.out.println("Benvenuto! " + Ingresso);
+                p.setOrarioIngresso(Ingresso);
             }
 
         }

@@ -226,6 +226,15 @@ public void go(){
                 if(!end_command.equals("END_CMD")){
                     System.out.println("Format error");
                 }
+                String IngressoPers = myserver.ingressoPersonale(received_command);
+                if(!IngressoPers.equals("Badge non riconosciuto, reinserire!")){
+                    pw.println(IngressoPers);
+                    pw.flush();
+                }
+                else {
+                    pw.println("");
+                    pw.flush();
+                }
 
             }
         }
