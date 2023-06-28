@@ -7,6 +7,7 @@ public class Client  {
     public static void main(String[] args) {
         String ip = args[0];
         int port = Integer.parseInt(args[1]);
+        var Badge = "";
         try {
             var socket = new Socket(ip, port);
             System.out.println("Connesso");
@@ -87,7 +88,7 @@ public class Client  {
                                     System.out.println("Inserire numero di Badge da eliminare:");
                                     pw.println("CMD_REMOVE_PERSONALE");
                                     pw.flush();
-                                    var Badge=input.nextLine();
+                                    Badge=input.nextLine();
                                     pw.println(Badge);
                                     pw.flush();
                                     pw.println("END_CMD");
@@ -269,7 +270,7 @@ public class Client  {
                         break;
                     case "i":
                         System.out.println("Inserire numero di badge per timbrare l'ingresso:");
-                        var Badge=input.nextLine();
+                        Badge=input.nextLine();
                         pw.println("IN_PERS");
                         pw.flush();
                         pw.println(Badge);
@@ -281,9 +282,29 @@ public class Client  {
                             System.out.println("Numero di Badge sbagliato, reinserire!");
                         }
                         else {
-                            System.out.println("Data inserita: " + enter);
+                            System.out.println("Data ingresso: " + enter);
                         }
                         break;
+                    case "u":
+                        System.out.println("Inserire numero di badge per timbrare l'uscita:");
+                        Badge=input.nextLine();
+                        pw.println("OUT_PERS");
+                        pw.flush();
+                        pw.println(Badge);
+                        pw.flush();
+                        pw.println("END_CMD");
+                        pw.flush();
+                        var exit = scanner.nextLine();
+                        if(exit.isBlank()){
+                            System.out.println("Numero di Badge sbagliato, reinserire!");
+                        }
+                        else {
+                            var min = scanner.nextLine();
+                            System.out.println("Data uscita: " + exit);
+                            System.out.println("Minuti accumulati: " + min);
+                        }
+                        break;
+
                     case "c":
                         System.out.println("Chiusura programma...");
                         pw.println("CMD_CLOSE");

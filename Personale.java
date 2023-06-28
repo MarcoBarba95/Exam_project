@@ -6,9 +6,9 @@ public class Personale extends Persona implements Serializable {
     private String OrarioIngresso;
     private String OrarioUscita;
     private boolean Status;
-    private float TotMinuti;
+    private long TotMinuti;
 
-    public Personale(String nome, String cognome, int eta, String sesso, String numBadge, String mansione, String orarioIngresso, String orarioUscita, boolean status, float totMinuti) {
+    public Personale(String nome, String cognome, int eta, String sesso, String numBadge, String mansione, String orarioIngresso, String orarioUscita, boolean status, long totMinuti) {
         super(nome, cognome, eta, sesso);
         this.NumBadge = numBadge;
         this.Mansione = mansione;
@@ -58,16 +58,16 @@ public class Personale extends Persona implements Serializable {
         Status = status;
     }
 
-    public float getTotMinuti() {
+    public long getTotMinuti() {
         return TotMinuti;
     }
 
-    public void setTotMinuti(float totMinuti) {
+    public void setTotMinuti(long totMinuti) {
         TotMinuti = totMinuti;
     }
 
     @Override
     public String toString() {
-        return super.toString() + ", Numero badge= " + NumBadge + ", Mansione= " + Mansione + " , Ingresso= " + OrarioIngresso + " , Uscita" + OrarioUscita+ " , Miniti totali di lavoro" + TotMinuti + '\'' ;
+        return super.toString() + ", Numero badge= " + NumBadge + ", Mansione= " + Mansione + " , Ingresso= " + OrarioIngresso + " , Uscita= " + OrarioUscita+ " , Minuti totali di lavoro= " + TotMinuti + '\'' ;
     }
 }

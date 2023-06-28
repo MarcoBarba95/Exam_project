@@ -1,11 +1,15 @@
 import java.io.*;
 import java.net.ServerSocket;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.time.format.DateTimeFormatter;
 import java.io.*;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 
 public class Server {
@@ -177,7 +181,7 @@ public class Server {
         int i = 0;
         for(Personale p: list_p){
             var Badge = p.getNumBadge();
-            if(numBadge.equals(Badge)){
+            if(numBadge.equals(Badge) && (!p.isStatus())){
                 i=1;
                 Ingresso = DataIngresso.format(DataIngressoFormat);
                 System.out.println("Benvenuto! " + Ingresso);
@@ -192,6 +196,56 @@ public class Server {
         }
         return Ingresso;
     }
+
+    public synchronized String uscitaPersonale(String numBadge){
+        String Uscita = "";
+        LocalDateTime DataUscita = LocalDateTime.now();
+        DateTimeFormatter DataUscitaFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        int i = 0;
+        for(Personale p: list_p){
+            var Badge = p.getNumBadge();
+            if(numBadge.equals(Badge) && p.isStatus()){
+                i=1;
+                Uscita = DataUscita.format(DataUscitaFormat);
+                System.out.println("Arrivederci! " + Uscita);
+                p.setOrarioUscita(Uscita);
+                p.setStatus(false);
+            }
+
+        }
+        if (i==0){
+            System.out.println("Badge non riconosciuto, reinserire!");
+            Uscita = "Badge non riconosciuto, reinserire!";
+        }
+
+        return Uscita;
+    }
+    public synchronized long contaMinuti(String numBadge){
+        long totMin = 0;
+        long diffInMinutes= 0;
+        for(Personale p: list_p){
+            var Badge = p.getNumBadge();
+            if(numBadge.equals(Badge)){
+                String uscita = p.getOrarioUscita();
+                String ingresso =  p.getOrarioIngresso();
+                try {
+                    Date Uscita1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(uscita);
+                    Date Ingresso1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(ingresso);
+                    totMin  =(Uscita1.getTime() - Ingresso1.getTime());
+                    diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(totMin);
+                    diffInMinutes = diffInMinutes + p.getTotMinuti();
+                    p.setTotMinuti(diffInMinutes);
+
+
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        return diffInMinutes;
+    }
+
 
 
     public static void main(String[] args) {

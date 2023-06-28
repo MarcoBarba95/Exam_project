@@ -237,7 +237,25 @@ public void go(){
                     pw.println("");
                     pw.flush();
                 }
-
+            }
+            else if(scelta_lista.equals("OUT_PERS")){
+                received_command=sc.nextLine();
+                var end_command=sc.nextLine();
+                if(!end_command.equals("END_CMD")){
+                    System.out.println("Format error");
+                }
+                String UscitaPers = myserver.uscitaPersonale(received_command);
+                float totMin = myserver.contaMinuti(received_command);
+                if(!UscitaPers.equals("Badge non riconosciuto, reinserire!")){
+                    pw.println(UscitaPers);
+                    pw.flush();
+                    pw.println(totMin);
+                    pw.flush();
+                }
+                else {
+                    pw.println("");
+                    pw.flush();
+                }
             }
         }
 
