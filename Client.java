@@ -284,8 +284,11 @@ public class Client  {
                         pw.println("END_CMD");
                         pw.flush();
                         var enter = scanner.nextLine();
-                        if(enter.isBlank()){
+                        if(enter.equals("Badge non riconosciuto, reinserire!")){
                             System.out.println("Numero di Badge sbagliato, reinserire!");
+                        }
+                        else if(enter.equals("Il lavoratore ha già timbrato l'ingresso")){
+                            System.out.println("Il lavoratore ha già timbrato l'ingresso");
                         }
                         else {
                             System.out.println("Data ingresso: " + enter);
@@ -301,8 +304,11 @@ public class Client  {
                         pw.println("END_CMD");
                         pw.flush();
                         var exit = scanner.nextLine();
-                        if(exit.isBlank()){
+                        if(exit.equals("Badge non riconosciuto, reinserire!")){
                             System.out.println("Numero di Badge sbagliato, reinserire!");
+                        }
+                        else if(exit.equals("Badge non registrato in ingresso")){
+                            System.out.println("Utente selezionato non ha timbrato in ingresso quindi l'uscita non può essere effettuata");
                         }
                         else {
                             var min = scanner.nextLine();

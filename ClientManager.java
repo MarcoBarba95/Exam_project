@@ -227,14 +227,8 @@ public void go(){
                     System.out.println("Format error");
                 }
                 String IngressoPers = myserver.ingressoPersonale(inputString);
-                if(!IngressoPers.equals("Badge non riconosciuto, reinserire!") && !IngressoPers.equals("Il lavoratore ha già timbrato l'ingresso")){
-                    pw.println(IngressoPers);
-                    pw.flush();
-                }
-                else {
-                    pw.println("");
-                    pw.flush();
-                }
+                pw.println(IngressoPers);
+                pw.flush();
             }
             else if(sceltaOpzione.equals("OUT_PERS")){
                 inputString=sc.nextLine();
@@ -243,15 +237,19 @@ public void go(){
                     System.out.println("Format error");
                 }
                 String UscitaPers = myserver.uscitaPersonale(inputString);
-                float totMin = myserver.contaMinuti(inputString);
-                if(!UscitaPers.equals("Badge non riconosciuto, reinserire!")){
+                if(UscitaPers.equals("Badge non riconosciuto, reinserire!")){
                     pw.println(UscitaPers);
                     pw.flush();
-                    pw.println(totMin);
+                }
+                else if(UscitaPers.equals("Badge non registrato in ingresso")) {
+                    pw.println(UscitaPers);
                     pw.flush();
                 }
                 else {
-                    pw.println("");
+                    long totMin = myserver.contaMinuti(inputString);
+                    pw.println(UscitaPers);
+                    pw.flush();
+                    pw.println(totMin);
                     pw.flush();
                 }
             }

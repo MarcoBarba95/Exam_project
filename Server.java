@@ -217,6 +217,11 @@ public class Server {
                 p.setOrarioUscita(Uscita);
                 p.setStatus(false);
             }
+            else if(numBadge.equals(Badge) && !p.isStatus()){
+                i=1;
+                System.out.println("Badge non registrato in ingresso");
+                Uscita="Badge non registrato in ingresso";
+            }
         }
         if (i==0){
             System.out.println("Badge non riconosciuto");
