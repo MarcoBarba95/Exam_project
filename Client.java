@@ -13,17 +13,14 @@ public class Client  {
             System.out.println("Connesso");
             var is=socket.getInputStream();
             var os=socket.getOutputStream();
-
             var scanner=new Scanner(is);
             var pw=new PrintWriter(os);
-
-            String seleziona_lista = "";
-            String seleziona_cmd = "";
+            String sceltaOpzione = "";
+            String inputString = "";
             var input = new Scanner(System.in);
-
-            while(!seleziona_lista.equals("c")){
+            while(!sceltaOpzione.equals("c")){
                 System.out.println("------------------------------------------------------------");
-                System.out.println("Scegliere il tipo di operazione che di desidera effettuare:");
+                System.out.println("Selezionare il tipo di opzione:");
                 System.out.println("p - Gestione lista del personale");
                 System.out.println("v - Gestione lista visitatori");
                 System.out.println("b - Biglietteria");
@@ -32,15 +29,14 @@ public class Client  {
                 System.out.println("c - Chiudi il programma");
                 System.out.println("-------------------------------------------------------------");
                 System.out.println("Inserisci scelta: ");
-                seleziona_lista = input.nextLine();
-
-                switch (seleziona_lista){
+                sceltaOpzione = input.nextLine();
+                switch (sceltaOpzione){
                     case "p":
                         System.out.println("Gestione lista del personale");
                         pw.println("LISTA_P");
                         pw.flush();
-                        seleziona_cmd = "";
-                        while (!seleziona_cmd.equals("q")){
+                        inputString = "";
+                        while (!inputString.equals("q")){
                             System.out.println("------------------------------------------------------------");
                             System.out.println("a - Aggiungi membro del personale");
                             System.out.println("r - Rimuovi membro del personale");
@@ -50,8 +46,8 @@ public class Client  {
                             System.out.println("q - Quit");
                             System.out.println("-------------------------------------------------------------");
                             System.out.println("Seleziona comando:");
-                            seleziona_cmd = input.nextLine();
-                            switch (seleziona_cmd){
+                            inputString = input.nextLine();
+                            switch (inputString){
                                 case "a":
                                     System.out.println("Inserisci nome: ");
                                     var nome = input.nextLine();
@@ -63,8 +59,6 @@ public class Client  {
                                     var sesso = input.nextLine();
                                     System.out.println("Inserisci mansione (Archeologo, Sicurezza, Amministrazione, Guida, Pulizie):");
                                     var mansione = input.nextLine();
-
-
                                     pw.println("CMD_ADD_PERSONALE");
                                     pw.flush();
                                     pw.println(nome);
@@ -79,10 +73,8 @@ public class Client  {
                                     pw.flush();
                                     pw.println("END_CMD");
                                     pw.flush();
-
                                     var conferma=scanner.nextLine();
                                     System.out.println(conferma);
-
                                     break;
                                 case "r":
                                     System.out.println("Inserire numero di Badge da eliminare:");
@@ -97,8 +89,8 @@ public class Client  {
                                     if(rimozione.equals("Utente rimosso correttamente")){
                                         System.out.println("Utente rimosso correttamente");
                                     }
-                                    else if(rimozione.equals("Impossibile rimuovere utente, possibili cause: utente non presenti nella lista o numero di badge errato")){
-                                        System.out.println("Impossibile rimuovere utente, possibili cause: utente non presenti nella lista o numero di badge errato");
+                                    else if(rimozione.equals("Impossibile rimuovere utente, possibili cause: utente non presente nella lista o numero di badge errato")){
+                                        System.out.println("Impossibile rimuovere utente, possibili cause: utente non presente nella lista o numero di badge errato");
                                     }
                                     break;
                                 case "l":
@@ -106,7 +98,6 @@ public class Client  {
                                     pw.flush();
                                     pw.println("END_CMD");
                                     pw.flush();
-
                                     boolean continue_list=true;
                                     System.out.println("----------------------------------------------------");
                                     System.out.println("Lista del personale:");
@@ -155,18 +146,19 @@ public class Client  {
                         System.out.println("Gestione lista visitatori");
                         pw.println("LISTA_V");
                         pw.flush();
-                        seleziona_cmd = "";
-                        while (!seleziona_cmd.equals("q")){
+                        inputString = "";
+                        while (!inputString.equals("q")){
                             System.out.println("------------------------------------------------------------");
                             System.out.println("a - Aggiungi visitatore");
+                            System.out.println("r - Rimuovi visitatore");
                             System.out.println("l - Mostra lista visitatori");
                             System.out.println("s - Salva lista visitatori");
                             System.out.println("c - Carica lista visitatori");
                             System.out.println("q - Quit");
                             System.out.println("-------------------------------------------------------------");
                             System.out.println("Seleziona comando:");
-                            seleziona_cmd = input.nextLine();
-                            switch (seleziona_cmd){
+                            inputString = input.nextLine();
+                            switch (inputString){
                                 case "a":
                                     System.out.println("Inserisci nome: ");
                                     var nome = input.nextLine();
@@ -178,7 +170,6 @@ public class Client  {
                                     var sesso = input.nextLine();
                                     System.out.println("Inserisci tipologia biglietto - Guidata o Libera: ");
                                     var TipologiaBiglietto = input.nextLine();
-
                                     pw.println("CMD_ADD_VISITATORE");
                                     pw.flush();
                                     pw.println(nome);
@@ -193,16 +184,31 @@ public class Client  {
                                     pw.flush();
                                     pw.println("END_CMD");
                                     pw.flush();
-
                                     var conferma=scanner.nextLine();
                                     System.out.println(conferma);
+                                    break;
+                                case "r":
+                                    System.out.println("Inserire numero di Biglietto da eliminare:");
+                                    pw.println("CMD_REMOVE_VISITATORE");
+                                    pw.flush();
+                                    var biglietto=input.nextLine();
+                                    pw.println(biglietto);
+                                    pw.flush();
+                                    pw.println("END_CMD");
+                                    pw.flush();
+                                    var rimozione = scanner.nextLine();
+                                    if(rimozione.equals("Utente rimosso correttamente")){
+                                        System.out.println("Utente rimosso correttamente");
+                                    }
+                                    else if(rimozione.equals("Impossibile rimuovere utente, possibili cause: utente non presente nella lista o ID Biglietto errato")){
+                                        System.out.println("Impossibile rimuovere utente, possibili cause: utente non presente nella lista o ID Biglietto errato");
+                                    }
                                     break;
                                 case "l":
                                     pw.println("CMD_MOSTRA_VISITATORE");
                                     pw.flush();
                                     pw.println("END_CMD");
                                     pw.flush();
-
                                     boolean continue_list=true;
                                     System.out.println("----------------------------------------------------");
                                     System.out.println("Lista dei visitatori:");
@@ -304,7 +310,6 @@ public class Client  {
                             System.out.println("Minuti accumulati: " + min);
                         }
                         break;
-
                     case "c":
                         System.out.println("Chiusura programma...");
                         pw.println("CMD_CLOSE");

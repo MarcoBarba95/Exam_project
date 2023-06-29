@@ -3,12 +3,9 @@ import java.net.ServerSocket;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.io.*;
-import java.util.Date;
-import java.util.Random;
-import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Server {
@@ -19,29 +16,37 @@ public class Server {
     public synchronized void AddPersonale(Personale p){
         list_p.add(p);
     }
-    
-/*    public synchronized String RemovePersonale(String NumBadge){
-        String rimozione = "";
-        int i = 0;
-        for(Personale p: list_p){
-            var Badge=p.getNumBadge();
-            if(NumBadge.equals(Badge)){
-                i=1;
-                list_p.remove(p);
-                rimozione="Utente rimosso correttamente";
-                System.out.println("Utente rimosso correttamente");
+
+    public synchronized String rimuoviPersonale(String numBadge){
+        Iterator<Personale> iter = list_p.iterator();
+        while (iter.hasNext()) {
+            Personale p = iter.next();
+            if(numBadge.equals(p.getNumBadge())){
+                iter.remove();
+                System.out.println("Utente rimosso");
+                return "Utente rimosso correttamente";
             }
         }
-
-       if (i==0){
-            System.out.println("Impossibile rimuovere utente, possibili cause: utente non presenti nella lista o numero di badge errato");
-            rimozione="Impossibile rimuovere utente, possibili cause: utente non presenti nella lista o numero di badge errato";
-        }
-        return rimozione;
-    }*/
+        System.out.println("Utente non trovato");
+        return "Impossibile rimuovere utente, possibili cause: utente non presente nella lista o numero di badge errato";
+    }
     
     public synchronized void AddVisitatore(Visitatore v){
             list_v.add(v);
+    }
+
+    public synchronized String rimuoviVisitatore(String IDBiglietto){
+        Iterator<Visitatore> iter = list_v.iterator();
+        while (iter.hasNext()) {
+            Visitatore v = iter.next();
+            if(IDBiglietto.equals(v.getIDBiglietto())){
+                iter.remove();
+                System.out.println("Vistatore rimosso");
+                return "Utente rimosso correttamente";
+            }
+        }
+        System.out.println("Visitatore non trovato");
+        return "Impossibile rimuovere utente, possibili cause: utente non presente nella lista o ID Biglietto errato";
     }
     
     public synchronized void commandSave(String filename,String tipo_lista){
@@ -183,6 +188,11 @@ public class Server {
                 System.out.println("Badge numero "+ numBadge + " timbra all'orario: " + Ingresso);
                 p.setOrarioIngresso(Ingresso);
                 p.setStatus(true);
+            }
+            else if(numBadge.equals(Badge) && p.isStatus()){
+                i = 1;
+                System.out.println("Utente già registrato!");
+                Ingresso = "Il lavoratore ha già timbrato l'ingresso";
             }
 
         }
