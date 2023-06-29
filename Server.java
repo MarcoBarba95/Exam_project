@@ -11,14 +11,15 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-
 public class Server {
     ArrayList<Personale> list_p = new ArrayList<>();
+    
     ArrayList<Visitatore> list_v = new ArrayList<>();
 
     public synchronized void AddPersonale(Personale p){
         list_p.add(p);
     }
+    
 /*    public synchronized String RemovePersonale(String NumBadge){
         String rimozione = "";
         int i = 0;
@@ -38,14 +39,14 @@ public class Server {
         }
         return rimozione;
     }*/
+    
     public synchronized void AddVisitatore(Visitatore v){
             list_v.add(v);
     }
+    
     public synchronized void commandSave(String filename,String tipo_lista){
-
         FileOutputStream fos = null;
         ObjectOutputStream oos = null;
-
         try {
             fos = new FileOutputStream(filename);
             oos = new ObjectOutputStream(fos);
@@ -66,10 +67,8 @@ public class Server {
     }
 
     public synchronized void commandLoad(String filename,String tipo_lista) {
-
         FileInputStream fis = null;
         ObjectInputStream ois = null;
-
         try {
             fis = new FileInputStream(filename);
             ois = new ObjectInputStream(fis);
@@ -91,60 +90,61 @@ public class Server {
     }
 
     public synchronized ArrayList<String> getListString(String tipo_lista) {
-        var people = new ArrayList<String>();
+        var persone = new ArrayList<String>();
         if(tipo_lista.equals("LISTA_V")){
             for (Visitatore v: list_v) {
-                people.add(v.toString());
+                persone.add(v.toString());
             }
         }
         else if (tipo_lista.equals("LISTA_P")){
             for (Personale p: list_p) {
-                people.add(p.toString());
+                persone.add(p.toString());
             }
         }
         else {
             System.out.println("LISTA NON TROVATA");
         }
-        return people;
+        return persone;
     }
 
     public static String generaBadge(String mansione){
         String badge="";
-        int randA= (int) (Math.random()*(9999-1000));
+        int rand= (int) (Math.random()*(9999-1000));
         if(mansione.equals("Archeologo") || mansione.equals("archeologo")){
             String badgeArch= "CTDE1000AC74";
-            badge=badgeArch+Integer.toString(randA);
+            badge=badgeArch+Integer.toString(rand);
         }
         else if(mansione.equals("Sicurezza") || mansione.equals("sicurezza")){
             String badgeSic= "CTDE1000SC89";
-            badge=badgeSic+Integer.toString(randA);
+            badge=badgeSic+Integer.toString(rand);
         }
         else if(mansione.equals("Amministrazione") || mansione.equals("amministrazione")){
             String badgeAmm= "CTDE1000AM69";
-            badge=badgeAmm+Integer.toString(randA);
+            badge=badgeAmm+Integer.toString(rand);
         }
         else if(mansione.equals("Guida") || mansione.equals("guida")){
             String badgeGui= "CTDE1000GT15";
-            badge=badgeGui+Integer.toString(randA);
+            badge=badgeGui+Integer.toString(rand);
         }
         else if(mansione.equals("Pulizie") || mansione.equals("pulizie")){
             String badgePul= "CTDE1000PZ35";
-            badge=badgePul+Integer.toString(randA);
+            badge=badgePul+Integer.toString(rand);
         }
         return badge;
     }
-
+    
     public static String generaBiglietto(String tipo_visita){
         String biglietto="";
-        int randB= (int) (Math.random()*(999999-100000));
+        int rand= (int) (Math.random()*(999999-100000));
         if(tipo_visita.equals("Guidata") || tipo_visita.equals("guidata")){
-            biglietto="GDT654AC"+randB;
+            biglietto="GDT654AC"+rand;
         }
         if(tipo_visita.equals("Libera") || tipo_visita.equals("libera")){
-            biglietto="LBR290GJ"+randB;
+            biglietto="LBR290GJ"+rand;
         }
         return biglietto;
     }
+    
     public synchronized String controlloBiglietto(String IDBiglietto){
         String Validita = "";
         int i = 0;
@@ -162,9 +162,6 @@ public class Server {
                     Validita = "Biglietto già usato";
                 }
             }
-
-            
-
         }
         if (i==0){
             System.out.println("Biglietto non presente");
@@ -172,26 +169,25 @@ public class Server {
         }
         return Validita;
     }
-
-
+    
     public synchronized String ingressoPersonale(String numBadge){
         String Ingresso = "";
         LocalDateTime DataIngresso = LocalDateTime.now();
-        DateTimeFormatter DataIngressoFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter DataIngressoFormattata = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         int i = 0;
         for(Personale p: list_p){
             var Badge = p.getNumBadge();
             if(numBadge.equals(Badge) && (!p.isStatus())){
                 i=1;
-                Ingresso = DataIngresso.format(DataIngressoFormat);
-                System.out.println("Benvenuto! " + Ingresso);
+                Ingresso = DataIngresso.format(DataIngressoFormattata);
+                System.out.println("Badge numero "+ numBadge + " timbra all'orario: " + Ingresso);
                 p.setOrarioIngresso(Ingresso);
                 p.setStatus(true);
             }
 
         }
         if (i==0){
-            System.out.println("Badge non riconosciuto, reinserire!");
+            System.out.println("Badge non riconosciuto");
             Ingresso = "Badge non riconosciuto, reinserire!";
         }
         return Ingresso;
@@ -200,61 +196,51 @@ public class Server {
     public synchronized String uscitaPersonale(String numBadge){
         String Uscita = "";
         LocalDateTime DataUscita = LocalDateTime.now();
-        DateTimeFormatter DataUscitaFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        DateTimeFormatter DataUscitaFormattata = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         int i = 0;
         for(Personale p: list_p){
             var Badge = p.getNumBadge();
             if(numBadge.equals(Badge) && p.isStatus()){
                 i=1;
-                Uscita = DataUscita.format(DataUscitaFormat);
-                System.out.println("Arrivederci! " + Uscita);
+                Uscita = DataUscita.format(DataUscitaFormattata);
+                System.out.println("Badge numero "+ numBadge + " timbra l'uscita all'orario: " + Uscita);
                 p.setOrarioUscita(Uscita);
                 p.setStatus(false);
             }
-
         }
         if (i==0){
-            System.out.println("Badge non riconosciuto, reinserire!");
+            System.out.println("Badge non riconosciuto");
             Uscita = "Badge non riconosciuto, reinserire!";
         }
-
         return Uscita;
     }
+    
     public synchronized long contaMinuti(String numBadge){
-        long totMin = 0;
-        long diffInMinutes= 0;
+        long totMinInMilSec = 0;
+        long totMinInMinutes = 0;
         for(Personale p: list_p){
             var Badge = p.getNumBadge();
             if(numBadge.equals(Badge)){
-                String uscita = p.getOrarioUscita();
-                String ingresso =  p.getOrarioIngresso();
+                String uscitaInString = p.getOrarioUscita();
+                String ingressoInString =  p.getOrarioIngresso();
                 try {
-                    Date Uscita1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(uscita);
-                    Date Ingresso1 = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(ingresso);
-                    totMin  =(Uscita1.getTime() - Ingresso1.getTime());
-                    diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(totMin);
-                    diffInMinutes = diffInMinutes + p.getTotMinuti();
-                    p.setTotMinuti(diffInMinutes);
-
-
+                    Date uscitaInDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(uscitaInString);
+                    Date ingressoInDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss").parse(ingressoInString);
+                    totMinInMilSec = (uscitaInDate.getTime() - ingressoInDate.getTime());
+                    totMinInMinutes = TimeUnit.MILLISECONDS.toMinutes(totMinInMilSec);
+                    totMinInMinutes = totMinInMinutes + p.getTotMinuti();
+                    p.setTotMinuti(totMinInMinutes);
                 } catch (ParseException e) {
                     throw new RuntimeException(e);
                 }
             }
         }
-
-        return diffInMinutes;
+        return totMinInMinutes;
     }
-
-
-
+    
     public static void main(String[] args) {
         var myserver = new Server();
-
-        int port = Integer.parseInt(args[0]); //Cast da stringa a intero
-
-
-
+        int port = Integer.parseInt(args[0]);
         try {
             var serverSocket = new ServerSocket(port);
             while (true){
@@ -265,7 +251,6 @@ public class Server {
                 var cm = new ClientManager(client_socket, myserver);
                 new Thread(cm).start();
             }
-
         }
         catch (IOException e){
                 throw new RuntimeException(e);
